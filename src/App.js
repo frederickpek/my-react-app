@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { Homepage, CounterButtonPage, PeopleListPage, NotFoundPage, ProtectedPage } from './pages';
 import './App.css';
 
 function App() {
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Link to="/">Go to home page</Link>
+        <Link to="/counter?startValue=0">Go to counter page</Link>
+        <Link to="/people-list">Go to people page</Link>
+        <Routes>
+          <Route path="/" exact element={<Homepage />} />
+          <Route path="/counter" element={<CounterButtonPage />} />
+          <Route path="/people-list" element={<PeopleListPage />} />
+          <Route path="/protected" element={<ProtectedPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
